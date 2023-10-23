@@ -1,0 +1,8 @@
+// <script src="./App.js"> </script>
+// <script src="App.js"> </script>
+
+Diff between above is that "App.js" is in the same directory
+ as your HTML file. The "./" is just an explicit way of denoting the 
+ current directory, but it doesn't change the behavior in this case.
+
+
