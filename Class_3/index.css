@@ -1,0 +1,17 @@
+* {
+    padding: 0;
+    margin : 0;
+}
+
+.h{
+height: 50px;
+background-color: rgb(164, 231, 208);
+}
+
+#img{
+    margin-right: 500px;
+}
+
+button{
+    margin-right: 550px;
+}
