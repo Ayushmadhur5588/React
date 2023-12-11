@@ -11,9 +11,9 @@ const useRestaurantMenu = (id) => {
   const fetchMenu = async () => {
     const data = await fetch(Menu_Api + id);
     const json = await data.json();
-    setresinfo(json.data);
+    setresinfo(json?.data);
   };
-   return resinfo;
+  return resinfo;
 };
 
 export default useRestaurantMenu;

@@ -4,6 +4,7 @@ const RestaurantCard = (props) => {
   const { data } = props;
   const { name, cuisines, avgRating, costForTwo, cloudinaryImageId, sla } =
     data?.info;
+
   return (
     <div className="m-4 p-1 max-w-[250px] hover:border-b-2 border-sky-500 transition duration-500">
       <img
@@ -19,7 +20,7 @@ const RestaurantCard = (props) => {
       <div className="flex text-sm">
         <h4 className="text-gray-500 font-light mr-2">⭑{avgRating}</h4>
         <h4 className="text-gray-500 font-light mr-2">
-          🕒 {sla.deliveryTime}mins
+          🕒 {sla?.deliveryTime}mins
         </h4>
         <h4 className="text-gray-500 font-light">◦{costForTwo}</h4>
       </div>
@@ -31,8 +32,10 @@ export const withPromoted = (RestaurantCard) => {
   return (props) => {
     return (
       <div>
-        <label className="absolute p-1 ml-4 bg-orange-400 text-white rounded-lg font-light">Promoted</label>
-        <RestaurantCard {...props}/>
+        <label className="absolute p-1 ml-4 bg-orange-400 text-white rounded-lg font-light">
+          Promoted
+        </label>
+        <RestaurantCard {...props} />
       </div>
     );
   };

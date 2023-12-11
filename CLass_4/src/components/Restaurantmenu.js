@@ -1,29 +1,43 @@
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import Restaurantmenu_child from "./Restaurantmenu_child";
+import RestaurantFooter from "./RestaurantFooter";
 
 const Restaurantmenu = () => {
-
   const p = useParams();
   const resinfo = useRestaurantMenu(p.id);
-  
+
   if (resinfo === null) return <Shimmer />;
+  const { name } = resinfo?.cards[0]?.card?.card?.info;
 
-  const { name } = resinfo.cards[0].card.card.info;
+  const category =
+    resinfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (item) =>
+        item?.card?.card?.["@type"] ==
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
-  const { itemCards } =
-    resinfo.cards[3].groupedCard.cardGroupMap.REGULAR.cards[1].card.card;
+  const footer_data =
+    resinfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (item) =>
+        item?.card?.card?.["@type"] ==
+          "type.googleapis.com/swiggy.presentation.food.v2.RestaurantAddress" ||
+        item?.card?.card?.["@type"] ==
+          "type.googleapis.com/swiggy.presentation.food.v2.RestaurantLicenseInfo"
+    );
 
   return (
-    <div>
-      <h2>{name}</h2>
+    <div className="text-center">
+      <h1 className="font-bold my-5 text-2xl">{name}</h1>
       <ul>
-        <h3>Recommended</h3>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>{item.card.info.name}</li>
+        {category.map((item) => (
+          <Restaurantmenu_child data={item.card.card} />
         ))}
       </ul>
+      <div>
+      <RestaurantFooter data={footer_data}/>
+      </div>
     </div>
   );
 };
