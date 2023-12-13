@@ -1,10 +1,7 @@
 import Restaurantmenu_items from "./Restaurantmenu_items";
-import { useState } from "react";
 
-const Restaurantmenu_child = (props) => {
-  const { itemCards, title } = props?.data;
-  const [itemCard, setitemCard] = useState(itemCards);
-  let flag = true;
+const Restaurantmenu_child = ({data , showItems, setshowIndex}) => {
+  const { itemCards, title } = data;
 
   return (
     <div>
@@ -12,19 +9,15 @@ const Restaurantmenu_child = (props) => {
         <div
           className="flex justify-between cursor-pointer"
           onClick={() => {
-            if (itemCard.length > 0) {
-              setitemCard([]);
-            } else {
-              setitemCard(itemCards);
-            }
+           setshowIndex();
           }}
         >
           <span className="font-arial font-bold">
             {title} ({itemCards.length})
           </span>
-          <span className="font-semibold text-2xl">^</span>
+          <span className="font-semibold text-2xl">{showItems ? 'v' : '^'}</span>
         </div>
-        <Restaurantmenu_items item={itemCard} />
+        {showItems && (<Restaurantmenu_items item={itemCards} />)}
       </div>
     </div>
   );

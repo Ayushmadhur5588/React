@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Restaurantmenu_child from "./Restaurantmenu_child";
 import RestaurantFooter from "./RestaurantFooter";
+import { useState } from "react";
 
 const Restaurantmenu = () => {
+  const [showIndex, setshowIndex] = useState(0);
   const p = useParams();
   const resinfo = useRestaurantMenu(p.id);
 
@@ -30,11 +32,20 @@ const Restaurantmenu = () => {
   return (
     <div className="text-center">
       <h1 className="font-bold my-5 text-2xl">{name}</h1>
-      <ul>
-        {category.map((item) => (
-          <Restaurantmenu_child data={item.card.card} />
+ 
+        {category.map((item, index) => (
+          <Restaurantmenu_child 
+          key={item?.card?.card?.title} 
+          data={item?.card?.card} 
+          showItems={index == showIndex? (true) : (false)}
+          setshowIndex={() => {
+            setshowIndex((prevIndex) =>
+              prevIndex === index ? null : index
+            );
+          }}
+          />
         ))}
-      </ul>
+     
       <div>
       <RestaurantFooter data={footer_data}/>
       </div>
