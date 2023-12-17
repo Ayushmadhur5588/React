@@ -1,14 +1,15 @@
 import RestaurantCard, { withPromoted } from "./RestaurantCard";
-import {useState} from "react";
+import { useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useRestaurantCard from "../utils/useRestaurantCard";
 
 const Body = () => {
-   const [val, setVal] = useState("");
-   const { listOfRestaurants, filterList, updatefilterList } = useRestaurantCard();
-   const RestaurantCardPromoted = withPromoted(RestaurantCard);
+  const [val, setVal] = useState("");
+  const { listOfRestaurants, filterList, updatefilterList } =
+    useRestaurantCard();
+  const RestaurantCardPromoted = withPromoted(RestaurantCard);
 
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false) {
@@ -19,11 +20,11 @@ const Body = () => {
     return <Shimmer />;
   }
   return (
-    <div className="body">
-      <div className="filter">
+    <div className="">
+      <div className="filter ">
         <input
           type="text"
-          className="border border-solid border-gray-400 rounded-lg font-light pl-1 m-2"
+          className="border border-solid border-gray-400 rounded-lg font-light pl-1 m-2 "
           placeholder="Search Restaurant..."
           value={val}
           onChange={(e) => {
@@ -32,7 +33,7 @@ const Body = () => {
         />
 
         <button
-          className="px-2 m-2 shadow-lg bg-blue-500 rounded-md text-white font-light"
+          className="p-2 m-2 rounded-2xl font-normal text-sm border border-gray-300 text-gray-700 overflow-hidden transition-transform hover:scale-90"
           onClick={() => {
             const newList = listOfRestaurants.filter((res) =>
               res?.info?.name?.toLowerCase().includes(val.toLowerCase())
@@ -44,7 +45,7 @@ const Body = () => {
         </button>
 
         <button
-          className="px-2 m-2 shadow-lg bg-blue-500 rounded-md text-white font-light"
+          className="p-2 m-2 rounded-2xl font-normal text-sm border border-gray-300 text-gray-700 overflow-hidden transition-transform hover:scale-90"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res?.info?.avgRating > 4
@@ -52,8 +53,21 @@ const Body = () => {
             updatefilterList(filteredList);
           }}
         >
-          Rating 4.0+
+          Ratings 4.O+
         </button>
+
+        <button className="p-2 m-2 rounded-2xl  font-normal text-sm border border-gray-300 text-gray-700 overflow-hidden transition-transform hover:scale-90">
+          Pure Veg
+        </button>
+
+        <button className="p-2 m-2 rounded-2xl  font-normal text-sm border border-gray-300 text-gray-700 overflow-hidden transition-transform hover:scale-90">
+          Sort By 
+        </button>
+
+        <button className="p-2 m-2 rounded-2xl  font-normal text-sm border border-gray-300 text-gray-700 overflow-hidden transition-transform hover:scale-90">
+          Offers
+        </button>
+
       </div>
 
       <div className="flex flex-wrap border-sky-800">
